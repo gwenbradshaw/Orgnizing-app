@@ -6,7 +6,7 @@ struct ContentView: View {
     @AppStorage("userRole") var userRole: String = "None"
 
     var body: some View {
-        if userRole == "None"{
+        if userRole == "None" {
             OnboardingView(selectedRole: $userRole)
         } else{
             //show main app once selection has been made
@@ -17,17 +17,13 @@ struct ContentView: View {
 
 }
 //the pop up options/screen
-strict OnboardingView: View {
+struct OnboardingView: View {
     @Binding var selectedRole: String
     var body: some View{
         VStack(spacing: 20){
             Text("Welcome to Booked!")
             .font(.largeTitle)
             .bold()
-
-            Text("To get started, tell us a bit more about yourself:")
-            .multilineTextAlignment(.center)
-            .badding()
 
             Button("I'm a Student 🎓"){ selectedRole = "Student"}
             .buttonStyle(.borderedProminent)
@@ -41,20 +37,65 @@ strict OnboardingView: View {
         .padding()
     }
 }
-struct MainAppVeiw: View{
+struct MainAppView: View {
     let role: String
-    // /(role) is how you make a variable 
-    
+    @AppStorage("userRole") var userRole: String = "None"
+    // /(role) is how you make a variable
+    let columns = [GridItem(.flexible()), GricItem(.flexible())]
+
     var body: some View{
         VStack{
-            Text ("Hi, \(role)!")
-                .font(.title)
-            Text("Here is your Booked! dashboard.")
+            Text(role.uppercased())
+                .font(.system(size:40, weight: .black))
+                .padding(.top)
+
+                Divider()
+
+                //grid layout
+                LazyVGrid(columns: columns, spacing:30){
+                    DashboardItem(icon: "calendar", label: "Calendar")
+                    DashboardItem(icon: "doc.text", label: "Assignments")
+                    DashboardItem(icon: "checklist", label: "To-Do's")
+                }
+                .padding()
+
+                Spacer()
+
+                //back to options button
+                Divider()
+                HStack{
+                    Button(action: { userRole = "None" }) {
+                        VStack {
+                            Image(systemName: "arrow.left.square")
+                            Text("Back to Options").font(.caption)
+                        }
+                    }
+                    .padding()
+                    .foregroundColor(.red)
+
+                    Spacer()
+                    }
+                }
+            }
         }
-    }
-    Button ("Logout") {
-        UserDefaults.standard.set("None", forKey: "userRole")
-    }
-    .padding(.top)
-    .foregroundColor(.red)
-}
+        // helper view
+        struct DashboardItem: View {
+            let icon: String
+            let label: String
+
+            var body: some View{
+                VStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.primary, lineWidth: 2)
+                        .frame(width: 80, height: 80)
+                        .overlay(Image(systemName: icon).font(.largeTitle))
+                    
+                    Text(label)
+                        .font(.caption)
+                        .bold()
+
+
+                }
+            }
+        }
+    
