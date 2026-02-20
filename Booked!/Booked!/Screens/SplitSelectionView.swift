@@ -51,5 +51,4 @@ struct SplitSelectionView: View{
         .ignoresSafeArea(edges: .bottom)
     }
 }
-dd
 

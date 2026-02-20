@@ -19,5 +19,15 @@ enum AppMode: String, CaseIterable {
         case .work: return .red
         }
     }
+    var options: [String] {
+    switch self {
+    case .work:
+        return ["Meeting", "Task", "Email Follow-up"]
+    case .school:
+        return ["Class", "Assignment", "Meeting", "Email", "Exam"]
+    case .personal:
+        return ["Gym", "Groceries", "Friends", "To-do" ]
+    }
+}
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81037DC62F3E8FEA0096FB9B /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81037DC52F3E8FE40096FB9B /* EventModel.swift */; };
+		81037DC82F3E90040096FB9B /* AddEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81037DC72F3E8FFF0096FB9B /* AddEventSheet.swift */; };
 		81F262ED2F3CD48800E207A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F262EA2F3CD48800E207A7 /* ContentView.swift */; };
 		81F262EE2F3CD48800E207A7 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F262EB2F3CD48800E207A7 /* Enums.swift */; };
 		81F262EF2F3CD48800E207A7 /* Booked_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F262E92F3CD48800E207A7 /* Booked_App.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81037DC52F3E8FE40096FB9B /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		81037DC72F3E8FFF0096FB9B /* AddEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventSheet.swift; sourceTree = "<group>"; };
 		81157B8F2F2C2FFA00D98723 /* Booked!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Booked!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F262E82F3CD48800E207A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81F262E92F3CD48800E207A7 /* Booked_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booked_App.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		81F262F22F3CD51F00E207A7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				81037DC72F3E8FFF0096FB9B /* AddEventSheet.swift */,
 				81F262FA2F3CD5FD00E207A7 /* DashboardItem.swift */,
 			);
 			path = Components;
@@ -93,6 +98,7 @@
 		81F262F32F3CD52700E207A7 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				81037DC52F3E8FE40096FB9B /* EventModel.swift */,
 				81F262EB2F3CD48800E207A7 /* Enums.swift */,
 			);
 			path = Logic;
@@ -171,10 +177,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				81F262ED2F3CD48800E207A7 /* ContentView.swift in Sources */,
+				81037DC62F3E8FEA0096FB9B /* EventModel.swift in Sources */,
 				81F262F92F3CD5D400E207A7 /* MainAppView.swift in Sources */,
 				81F262FD2F3CD73100E207A7 /* CalendarView.swift in Sources */,
 				81F262F52F3CD55700E207A7 /* OnboardingView.swift in Sources */,
 				81F262EE2F3CD48800E207A7 /* Enums.swift in Sources */,
+				81037DC82F3E90040096FB9B /* AddEventSheet.swift in Sources */,
 				81F262EF2F3CD48800E207A7 /* Booked_App.swift in Sources */,
 				81F262F72F3CD59C00E207A7 /* SplitSelectionView.swift in Sources */,
 				81F262FB2F3CD60300E207A7 /* DashboardItem.swift in Sources */,

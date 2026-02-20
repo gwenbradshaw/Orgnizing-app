@@ -11,16 +11,15 @@ struct ContentView: View {
     var body: some View {
         if userRole == "None" {
             OnboardingView(selectedRole: $userRole)
-        } else if activeMode == nil && userRole != "Human" {
+        } else if activeMode == nil {
             //split screen
             SplitSelectionView(role: userRole, activeMode: $activeMode, userRole: $userRole)
         } else {
             //show main app once selection has been made
-            MainAppView(role: userRole, mode: activeMode ?? .personal, activeMode: $activeMode)
+            MainAppView(role: userRole, mode: activeMode!,activeMode: $activeMode)
         }
 
     }
-
 }
 
 
