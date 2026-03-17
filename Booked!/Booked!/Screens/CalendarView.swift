@@ -16,7 +16,8 @@ struct CalendarView: View {
     
     @Environment(\.dismiss) var dismiss //ability to close screen
     @Environment(\.modelContext) var modelContext // for deleting
-    @Query private var allEvents: [CalendarEvent] //gets all events from the database
+    @Query(sort: \CalendarEvent.timestamp) private var allEvents: [CalendarEvent] //gets all events from the database
+   
     
     //keeping calendar universal
     var filteredEvents: [CalendarEvent] {
@@ -43,6 +44,7 @@ struct CalendarView: View {
                         .background(RoundedRectangle(cornerRadius: 20).fill(Color.secondary.opacity(0.1)))
                         .padding()
                         .frame(height: 400) // UICalendarView needs a set height to look good
+                        .id(allEvents.count)
                     
                     List{
                         Section(header: Text("Scheduled for \(selectedDate.formatted(date: .abbreviated, time: .omitted))")) {
@@ -165,8 +167,11 @@ struct CalendarWithDots: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UICalendarView, context: Context) {
+        // 1. Get the components for the date you just changed
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: selectedDate)
         
-        uiView.reloadDecorations(forDateComponents: [], animated: true)
+        // 2. Tell the calendar to specifically reload that day (and any others if needed)
+        uiView.reloadDecorations(forDateComponents: [components], animated: true)
     }
 
     func makeCoordinator() -> Coordinator {

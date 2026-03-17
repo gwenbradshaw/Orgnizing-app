@@ -16,7 +16,14 @@ struct AddEventSheet: View {
     @State private var selectedDate = Date()
     @State private var selectedState: AppMode = .work
     @State private var selectedType = "Meeting"
-    
+    @State private var notificationsEnabled: Bool = true
+    @State private var reminderOffset: Int = 0//minutes before reminder
+    let reminderOptions = [
+        ("At time of event", 0),
+        ("30 minutes before event", 30),
+        ("1 hour before event", 60),
+        ("1 day before", 1440)
+    ]
     @State private var selectedRepeatDays: Set<Int> = []
     let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     
@@ -65,6 +72,17 @@ struct AddEventSheet: View {
                         }
                     }
                 }
+                Section("Reminders"){
+                    Toggle("Notify me", isOn: $notificationsEnabled)
+                        .tint(selectedState.themeColor)
+                    if notificationsEnabled {
+                        Picker("Reminder", selection: $reminderOffset){
+                            ForEach(reminderOptions, id: \.1) { option in
+                                Text(option.0).tag(option.1)
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle(Text("Add Event"))
             .toolbar{
@@ -78,12 +96,19 @@ struct AddEventSheet: View {
                             repeatDays: Array(selectedRepeatDays)
                             )
                         modelContext.insert(newEvent)
+                        
+                        if notificationsEnabled{
+                            NotificationManager.instance.scheduleNotification(title: "Booked: \(eventTitle)", date: selectedDate, repeatDays: Array(selectedRepeatDays),id: newEvent.persistentModelID.hashValue.description, offsetMinutes: reminderOffset)
+                        }
+
+                        
                         dismiss()
                     }
                     .disabled(eventTitle.isEmpty)
                 }
                 ToolbarItem(placement: .cancellationAction){
                     Button("Cancel") { dismiss()}
+                
                 }
             }
         }

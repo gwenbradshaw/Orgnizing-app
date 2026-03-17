@@ -1,6 +1,8 @@
-// screen for student, worker, human for the tabs there
+
 
 import SwiftUI
+import UserNotifications
+
 struct MainAppView: View {
     let role: String
     let mode: AppMode
@@ -53,6 +55,7 @@ struct MainAppView: View {
             .sheet(isPresented: $showingCalendar) {
                 CalendarView(mode: mode)
             }
+            
         }
     }
 }

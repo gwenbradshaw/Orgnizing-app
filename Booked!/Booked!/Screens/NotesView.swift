@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NotesView: View {
-    // Saves all notes 
+    // Saves all notes
     @AppStorage("saved_notes_list") private var savedNotes: String = ""
     @State private var showingAddNote = false
 
